@@ -32,17 +32,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int centerX;
     private int centerY;
 
+    private boolean lamp_type = true;
+    private boolean music_type = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        setListener();
     }
 
     /**
      * 初始化页面
      */
-    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         findViewById(R.id.ib_setting);
         mIbGearOne = findViewById(R.id.ib_gear_one);
@@ -58,79 +61,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mIbMusic = findViewById(R.id.ib_music);
         mIbDirection = findViewById(R.id.iv_direction);
 
+        // 版本类型
+        String type = getIntent().getStringExtra("type");
+        if("0".equals(type)){
+            mIbGearOne.setVisibility(View.GONE);
+            mIbGearTwo.setVisibility(View.GONE);
+            mIbGearThree.setVisibility(View.GONE);
+        }else{
+            mIbGearOne.setVisibility(View.VISIBLE);
+            mIbGearTwo.setVisibility(View.VISIBLE);
+            mIbGearThree.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    /**
+     * 设置监听事件
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private void setListener() {
         mIbSetting.setOnClickListener(this);
         mIbGearOne.setOnClickListener(this);
         mIbGearTwo.setOnClickListener(this);
         mIbGearThree.setOnClickListener(this);
         mIbReturn.setOnClickListener(this);
-
-        mIbDirection.setOnTouchListener(new View.OnTouchListener() {
-            private float angle;
-            //初始的旋转角度
-            private float oriRotation = 0;
-            private int y_down;
-            private int x_down;
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        // 触摸点
-                        x_down = (int) event.getX();
-                        y_down = (int) event.getY();
-
-                        centerX = view.getWidth() / 2;
-                        centerY = view.getHeight() / 2;
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int x = (int) event.getX();
-                        int y = (int) event.getY();
-                        angle = angle(new Point(centerX, centerY), new Point(x_down, y_down), new Point(x, y));
-                        Log.d(TAG, "onTouch: angle" + angle);
-                        view.setRotation(angle);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        view.setRotation(0f);
-                        break;
-                        default:
-                }
-                return true;
-            }
-        });
+        mIbLamp.setOnClickListener(this);
+        mIbMusic.setOnClickListener(this);
     }
-
-    public float angle(Point cen, Point first, Point second) {
-        float dx1, dx2, dy1, dy2;
-
-        dx1 = first.x - cen.x;
-        dy1 = first.y - cen.y;
-        dx2 = second.x - cen.x;
-        dy2 = second.y - cen.y;
-
-        // 计算三边的平方
-        float ab2 = (second.x - first.x) * (second.x - first.x) + (second.y - first.y) * (second.y - first.y);
-        float oa2 = dx1*dx1 + dy1*dy1;
-        float ob2 = dx2 * dx2 + dy2 *dy2;
-
-        // 根据两向量的叉乘来判断顺逆时针
-        boolean isClockwise = ((first.x - cen.x) * (second.y - cen.y) - (first.y - cen.y) * (second.x - cen.x)) > 0;
-
-        // 根据余弦定理计算旋转角的余弦值
-        double cosDegree = (oa2 + ob2 - ab2) / (2 * Math.sqrt(oa2) * Math.sqrt(ob2));
-        Log.d(TAG, "cosDegree: " + cosDegree);
-        // 异常处理，因为算出来会有误差绝对值可能会超过一，所以需要处理一下
-//        if (cosDegree > 1) {
-//            cosDegree = 1;
-//        } else if (cosDegree < -1) {
-//            cosDegree = -1;
-//        }
-
-        // 计算弧度
-        double radian = Math.acos(cosDegree);
-        // 计算旋转过的角度，顺时针为正，逆时针为负
-        return (float) (isClockwise ? Math.toDegrees(radian) : -Math.toDegrees(radian));
-
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -162,6 +119,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ib_return:
                 finish();
+                break;
+            case R.id.ib_lamp:
+                lamp_type = !lamp_type;
+                if(lamp_type){
+                    mIbLamp.setBackgroundResource(R.mipmap.icon_lamp);
+                }else {
+                    mIbLamp.setBackgroundResource(R.mipmap.icon_lamp_close);
+                }
+                break;
+            case R.id.ib_music:
+                music_type = !music_type;
+                if (music_type){
+                    mIbMusic.setBackgroundResource(R.mipmap.icon_music);
+                }else {
+                    mIbMusic.setBackgroundResource(R.mipmap.icon_music_close);
+                }
                 break;
                 default:
         }

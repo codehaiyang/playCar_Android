@@ -44,10 +44,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             // 简易版
             case R.id.ib_easy:
+                intent.putExtra("type","0");
                 startActivity(intent);
                 break;
             // 功能版
             case R.id.ib_function:
+                intent.putExtra("type","1");
                 startActivity(intent);
                 break;
                 default:

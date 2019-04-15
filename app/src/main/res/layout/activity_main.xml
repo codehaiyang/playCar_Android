@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="23dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp">
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -66,24 +66,10 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/ib_gear_one"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@mipmap/icon_one"/>
-
-                <ImageButton
-                    android:id="@+id/ib_gear_two"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@mipmap/icon_two"
-                    android:layout_marginTop="12dp"/>
-
-                <ImageButton
-                    android:id="@+id/ib_gear_three"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@mipmap/icon_three"
-                    android:layout_marginTop="12dp" />
+                    android:id="@+id/ib_go_long"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/contro_icon_rock"/>
 
             </android.support.v7.widget.LinearLayoutCompat>
 
@@ -94,8 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/rl_gear"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="23dp"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="10dp">
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -108,13 +94,13 @@
                     android:id="@+id/ib_go"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:background="@mipmap/icon_up"/>
+                    android:background="@drawable/contro_icon_go"/>
 
                 <ImageButton
                     android:id="@+id/ib_back"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:background="@mipmap/icon_down"
+                    android:background="@drawable/contro_icon_down"
                     android:layout_marginTop="12dp" />
 
             </android.support.v7.widget.LinearLayoutCompat>
@@ -128,29 +114,82 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="249dp"
-                android:layout_height="113dp"
-                android:src="@mipmap/meter"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/meter">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/meter_watch"/>
+
+            </RelativeLayout>
 
             <ImageButton
                 android:id="@+id/ib_stop"
-                android:layout_width="122dp"
-                android:layout_height="62dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
-                android:background="@mipmap/icon_stop"/>
+                android:background="@drawable/contro_icon_stop"/>
 
         </LinearLayout>
 
-        <ImageView
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="80dp">
+
+                <ImageButton
+                    android:id="@+id/ib_gear_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/contro_icon_gears_one"/>
+
+                <ImageButton
+                    android:id="@+id/ib_gear_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/contro_icon_gears_two"
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/ib_gear_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/contro_icon_gears_three"
+                    android:layout_marginLeft="10dp"/>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_direction"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:src="@mipmap/control"/>-->
+
+        <com.yundongjia.app.CustomImageView
             android:id="@+id/iv_direction"
-            android:layout_width="186dp"
-            android:layout_height="182dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="5dp"
-            android:src="@mipmap/control"/>
+            android:layout_marginRight="30dp"/>
 
     </RelativeLayout>
 
